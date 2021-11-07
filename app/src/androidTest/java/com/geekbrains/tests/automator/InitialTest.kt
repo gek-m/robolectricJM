@@ -20,8 +20,6 @@ class InitialTest {
 
     @Test
     fun test_DeviceNotNull() {
-
-
         val uiDevice: UiDevice = UiDevice.getInstance(getInstrumentation())
         Assert.assertNotNull(uiDevice)
     }

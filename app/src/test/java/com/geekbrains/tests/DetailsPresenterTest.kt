@@ -1,5 +1,8 @@
 package com.geekbrains.tests
 
+import com.geekbrains.test.DECREMENTED_VALUE_9
+import com.geekbrains.test.DEFAULT_VALUE_10
+import com.geekbrains.test.INCREMENTED_VALUE_11
 import com.geekbrains.tests.presenter.details.DetailsPresenter
 import com.geekbrains.tests.view.details.ViewDetailsContract
 import com.nhaarman.mockito_kotlin.never
@@ -19,16 +22,10 @@ class DetailsPresenterTest {
     @Mock
     private lateinit var viewContract: ViewDetailsContract
 
-    companion object {
-        private const val DEFAULT_VALUE = 10
-        private const val INCREMENTED_VALUE = 11
-        private const val DECREMENTED_VALUE = 9
-    }
-
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        presenter = DetailsPresenter(DEFAULT_VALUE)
+        presenter = DetailsPresenter(DEFAULT_VALUE_10)
         presenter.onAttach(viewContract)
     }
 
@@ -36,28 +33,28 @@ class DetailsPresenterTest {
     fun detailsPresenter_onDecrement_RunOnce_ReturnTrue() {
         presenter.onDecrement()
         verify(viewContract, times(1))
-            .setCount(ArgumentMatchers.eq(DECREMENTED_VALUE))
+            .setCount(ArgumentMatchers.eq(DECREMENTED_VALUE_9))
     }
 
     @Test
     fun detailsPresenter_onIncrement_RunOnce_ReturnTrue() {
         presenter.onIncrement()
         verify(viewContract, times(1))
-            .setCount(ArgumentMatchers.eq(INCREMENTED_VALUE))
+            .setCount(ArgumentMatchers.eq(INCREMENTED_VALUE_11))
     }
 
     @Test
     fun detailsPresenter_onDecrement_ReturnCorrectValue() {
         presenter.onDecrement()
         verify(viewContract)
-            .setCount(ArgumentMatchers.eq(DECREMENTED_VALUE))
+            .setCount(ArgumentMatchers.eq(DECREMENTED_VALUE_9))
     }
 
     @Test
     fun detailsPresenter_onIncrement_ReturnCorrectValue() {
         presenter.onIncrement()
         verify(viewContract)
-            .setCount(ArgumentMatchers.eq(INCREMENTED_VALUE))
+            .setCount(ArgumentMatchers.eq(INCREMENTED_VALUE_11))
     }
 
     @Test
@@ -65,7 +62,7 @@ class DetailsPresenterTest {
         presenter.onDetach()
         presenter.onIncrement()
         verify(viewContract, times(0))
-            .setCount(ArgumentMatchers.eq(DEFAULT_VALUE))
+            .setCount(ArgumentMatchers.eq(DEFAULT_VALUE_10))
     }
 
     @Test
@@ -73,7 +70,7 @@ class DetailsPresenterTest {
         presenter.onDetach()
         presenter.onDecrement()
         verify(viewContract, never())
-            .setCount(ArgumentMatchers.eq(DEFAULT_VALUE))
+            .setCount(ArgumentMatchers.eq(DEFAULT_VALUE_10))
     }
 
     @After

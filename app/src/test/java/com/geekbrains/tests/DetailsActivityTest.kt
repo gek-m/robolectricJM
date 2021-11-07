@@ -9,6 +9,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.geekbrains.test.DEC_DEFAULT_VALUE
+import com.geekbrains.test.DEFAULT_VALUE
+import com.geekbrains.test.INC_DEFAULT_VALUE
+import com.geekbrains.test.NUMBER_RESULT_TEXT
 import com.geekbrains.tests.view.details.DetailsActivity
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNotNull
@@ -55,7 +59,7 @@ class DetailsActivityTest {
     fun activityTextView_HasText() {
         scenario.onActivity {
             val totalCountTextView = it.findViewById<TextView>(R.id.totalCountTextView)
-            assertEquals("Number of results: 0", totalCountTextView.text)
+            assertEquals(NUMBER_RESULT_TEXT + DEFAULT_VALUE, totalCountTextView.text)
         }
     }
 
@@ -85,7 +89,7 @@ class DetailsActivityTest {
             val totalCountTextView = it.findViewById<TextView>(R.id.totalCountTextView)
             incrementButton.performClick()
 
-            assertEquals("Number of results: 1", totalCountTextView.text)
+            assertEquals(NUMBER_RESULT_TEXT + INC_DEFAULT_VALUE, totalCountTextView.text)
         }
     }
 
@@ -96,7 +100,7 @@ class DetailsActivityTest {
             val totalCountTextView = it.findViewById<TextView>(R.id.totalCountTextView)
             decrementButton.performClick()
 
-            assertEquals("Number of results: -1", totalCountTextView.text)
+            assertEquals(NUMBER_RESULT_TEXT + DEC_DEFAULT_VALUE, totalCountTextView.text)
         }
     }
 
