@@ -14,6 +14,11 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import androidx.test.uiautomator.Until
+import com.geekbrains.test.*
+import com.geekbrains.test.DEC_DEFAULT_VALUE
+import com.geekbrains.test.DEFAULT_VALUE
+import com.geekbrains.test.INC_DEFAULT_VALUE
+import com.geekbrains.test.NUMBER_RESULT_TEXT
 import com.geekbrains.tests.R
 import org.junit.Assert
 import org.junit.Before
@@ -56,7 +61,7 @@ class BehaviorTest {
 
         val editText = uiDevice.findObject(By.res(packageName, "searchEditText"))
 
-        editText.text = "UiAutomator"
+        editText.text = TEXT_TO_SEARCH_UI
 
         Espresso.onView(ViewMatchers.withId(R.id.searchEditText))
             .perform(ViewActions.pressImeActionButton())
@@ -86,7 +91,7 @@ class BehaviorTest {
                 Until.findObject(By.res(packageName, "totalCountTextView")),
                 TIMEOUT
             )
-        Assert.assertEquals(changedText.text, "Number of results: 0")
+        Assert.assertEquals(changedText.text, NUMBER_RESULT_TEXT + DEFAULT_VALUE)
     }
 
     @Test
@@ -94,7 +99,7 @@ class BehaviorTest {
 
         val editText = uiDevice.findObject(By.res(packageName, "searchEditText"))
 
-        editText.text = "UiAutomator"
+        editText.text = TEXT_TO_SEARCH_UI
 
         uiDevice.findObject(
             By.res(packageName, "searchButton")
@@ -117,7 +122,7 @@ class BehaviorTest {
         )
         toDetails.click()
 
-        Assert.assertEquals(changedText.text, "Number of results: 686")
+        Assert.assertEquals(changedText.text, NUMBER_RESULT_TEXT + UI_SEARCH_RESULT)
     }
 
     @Test
@@ -150,7 +155,7 @@ class BehaviorTest {
             )
         )
 
-        Assert.assertEquals("Number of results: $INCREASED_VALUE", changedText.text)
+        Assert.assertEquals(NUMBER_RESULT_TEXT + INC_DEFAULT_VALUE, changedText.text)
     }
 
     @Test
@@ -183,7 +188,7 @@ class BehaviorTest {
             )
         )
 
-        Assert.assertEquals("Number of results: $DECREASED_VALUE", changedText.text)
+        Assert.assertEquals(NUMBER_RESULT_TEXT + DEC_DEFAULT_VALUE, changedText.text)
     }
 
     @Test
@@ -220,11 +225,5 @@ class BehaviorTest {
         val editText = uiDevice.findObject(By.res(packageName, "searchEditText"))
 
         Assert.assertNull(editText)
-    }
-
-    companion object {
-        private const val TIMEOUT = 10000L
-        private const val INCREASED_VALUE = 1
-        private const val DECREASED_VALUE = -1
     }
 }

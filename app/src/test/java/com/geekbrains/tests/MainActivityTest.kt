@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.geekbrains.test.EMPTY_REQUEST_TOAST
 import com.geekbrains.tests.view.search.MainActivity
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
@@ -90,9 +91,5 @@ class MainActivityTest {
             ShadowLooper.idleMainLooper()
             assertEquals(ShadowToast.getTextOfLatestToast(), EMPTY_REQUEST_TOAST)
         }
-    }
-
-    companion object {
-        private const val EMPTY_REQUEST_TOAST = "Enter search word"
     }
 }

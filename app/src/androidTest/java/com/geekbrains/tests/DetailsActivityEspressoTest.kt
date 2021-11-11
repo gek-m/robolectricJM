@@ -8,6 +8,10 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.geekbrains.test.DEC_DEFAULT_VALUE
+import com.geekbrains.test.DEFAULT_VALUE
+import com.geekbrains.test.INC_DEFAULT_VALUE
+import com.geekbrains.test.NUMBER_RESULT_TEXT
 import com.geekbrains.tests.view.details.DetailsActivity
 import junit.framework.TestCase
 import org.junit.After
@@ -47,7 +51,7 @@ class DetailsActivityEspressoTest {
 
     @Test
     fun activityTextView_HasText() {
-        val assertion = matches(withText("Number of results: 0"))
+        val assertion = matches(withText(NUMBER_RESULT_TEXT + DEFAULT_VALUE))
         onView(withId(R.id.totalCountTextView)).check(assertion)
     }
 
@@ -70,13 +74,15 @@ class DetailsActivityEspressoTest {
     @Test
     fun activityButtonIncrement_IsWorking() {
         onView(withId(R.id.incrementButton)).perform(click())
-        onView(withId(R.id.totalCountTextView)).check(matches(withText("Number of results: 1")))
+        onView(withId(R.id.totalCountTextView))
+            .check(matches(withText(NUMBER_RESULT_TEXT + INC_DEFAULT_VALUE)))
     }
 
     @Test
     fun activityButtonDecrement_IsWorking() {
         onView(withId(R.id.decrementButton)).perform(click())
-        onView(withId(R.id.totalCountTextView)).check(matches(withText("Number of results: -1")))
+        onView(withId(R.id.totalCountTextView))
+            .check(matches(withText(NUMBER_RESULT_TEXT + DEC_DEFAULT_VALUE)))
     }
 
     @After
